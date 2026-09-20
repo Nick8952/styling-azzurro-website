@@ -14,8 +14,8 @@ Termine ausgelöst (das Formular öffnet nur das E-Mail-Programm; im Test wurde 
 | `npm run build:pages` mit Unterpfad | 14 Routen exportiert |
 | `npm run export:pruefen` | 14 Seiten, 305 Dateien: keine toten Verweise, kein Verweis ohne Unterpfad, keine Sanity-Adresse, kein Token |
 | Build ohne Env-Variablen | funktioniert (`.env.local` existiert nicht) |
-| GitHub Actions | Run 35530777253 grün (typecheck, lint, test, build, export-Prüfung, Deploy) |
-| `npm run live:pruefen` gegen GitHub Pages | 11 Routen 200 + noindex, 45 referenzierte Dateien 200, 404-Seite, robots.txt |
+| GitHub Actions | Runs 35530777253 und 35531977757 (nach Codex-Fixes) grün (typecheck, lint, test, build, export-Prüfung, Deploy) |
+| `npm run live:pruefen` gegen GitHub Pages | 11 Routen 200 + noindex, og:image abrufbar, 46 referenzierte Dateien 200, 404-Seite, robots.txt (Stand nach Codex-Fixes) |
 
 ## Inhalt und Fakten
 - Inventur `docs/inhaltsinventur.md`: alle 8 Inhaltsseiten + Rechtsseiten zugeordnet.
