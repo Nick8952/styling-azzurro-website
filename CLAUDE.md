@@ -102,6 +102,10 @@ prüfen → `lib/inhalt/index.ts` auf `sanityInhaltsquelle` umstellen →
 `DEPLOY_TARGET=vercel` → Vercel-Import mit Env-Variablen → Webhook für Revalidation.
 Keine Zugangsdaten in Dateien; `.env.local` ist ignoriert.
 
+Falle (21.09.2026 aufgetreten): Vercel liefert leer angelegte Variablen als `""`, nicht
+als `undefined`. Deshalb in `lib/seite-url.ts` nie `??` allein auf `NEXT_PUBLIC_SITE_URL`
+verlassen; die Datei prüft auf leer und nutzt Vercels eigene URL-Variablen als Fallback.
+
 ## Nach wichtiger Arbeit
 
 Obsidian-Brain aktualisieren (`Websites Hustle/04_Clients/Styling-Azzurro.md`,

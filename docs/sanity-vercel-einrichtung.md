@@ -82,6 +82,13 @@ Was sich damit ändert: Bilder kommen vom Sanity-CDN (`absolut: true`, kein Unte
    `NEXT_PUBLIC_SANITY_DATASET`, `NEXT_PUBLIC_SITE_URL=https://<projekt>.vercel.app`
    (später Kundendomain), `SANITY_REVALIDATE_SECRET` (zufälliger Wert). **Kein**
    Schreib-Token auf Vercel.
+   Hinweis: Vercel übergibt jede angelegte Variable, auch eine leere, als leere
+   Zeichenkette. `lib/seite-url.ts` behandelt leer deshalb wie «nicht gesetzt» und
+   fällt auf Vercels eigene `VERCEL_PROJECT_PRODUCTION_URL` zurück (Build-Fehler
+   «Invalid URL» vom 21.09.2026 behoben).
+   Ohne Sanity (Inhalte weiterhin aus `data/`) genügt auf Vercel auch der Standard-
+   Build `npm run build`: Er erzeugt den statischen Export ohne Unterpfad, den Vercel
+   als statische Site ausliefert.
 4. Aktualisierung: Ohne weitere Massnahme sind Inhalte ein Build-Stand. Für
    Aktualisierung nach jedem Veröffentlichen: in Sanity einen Webhook auf
    `https://<domain>/api/revalidate?secret=…` einrichten und in der App eine
