@@ -9,9 +9,11 @@ import type { Inhaltsquelle } from "./typen";
  * Hier steht bewusst KEINE Umschaltung zur Laufzeit. Würde diese Datei beide
  * Quellen importieren, läge der Sanity-Client im Abhängigkeitsbaum des
  * statischen Exports, auch wenn er nie aufgerufen wird. Der Wechsel auf
- * Sanity ist deshalb ein bewusster Einzeiler:
+ * Sanity ersetzt den Inhalt dieser Datei durch genau diese drei Zeilen:
  *
+ *   import "server-only";
  *   export { sanityInhaltsquelle as inhalt } from "@/sanity/inhaltsquelle";
+ *   export type { Inhaltsquelle } from "./typen";
  *
  * Alles Übrige (Seiten, Komponenten, Typen) bleibt unverändert.
  * Siehe docs/sanity-vercel-einrichtung.md.

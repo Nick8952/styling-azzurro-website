@@ -14,9 +14,10 @@ import { datumLang, zeitenGruppiert, zeitenKurz } from "../lib/zeiten";
 
 /* ------------------------------------------------ Preisliste = Quellbild */
 
-test("Preisliste: 31 Positionen in 3 Kategorien wie im Original", () => {
+test("Preisliste: 29 Positionen in 3 Kategorien wie im Original", () => {
   const anzahl = preisliste.kategorien.map((k) => k.positionen.length);
   assert.deepEqual(anzahl, [19, 4, 6]);
+  assert.equal(preisliste.kategorien.flatMap((k) => k.positionen).length, 29);
   assert.deepEqual(
     preisliste.kategorien.map((k) => k.titel),
     ["Damen", "Herren", "Kinder, Jugendliche und Studenten"]
@@ -124,16 +125,18 @@ test("text(): Schlüssel sind deterministisch und eindeutig", () => {
 
 /* ------------------------------------------------------- Öffnungszeiten */
 
-test("Öffnungszeiten: Mo bis Fr zusammengefasst, Sa und So geschlossen", () => {
+test("Öffnungszeiten: Mo bis Fr zusammengefasst, Sa geschlossen, So ohne Angabe", () => {
   const gruppen = zeitenGruppiert(einstellungen.oeffnungszeiten);
   assert.deepEqual(
     gruppen.map((g) => [g.tage, g.text]),
     [
       ["Montag bis Freitag", "08.00 bis 12.00, 13.30 bis 17.00"],
-      ["Samstag bis Sonntag", "geschlossen"],
+      ["Samstag", "geschlossen"],
     ]
   );
-  assert.equal(zeitenKurz(einstellungen.oeffnungszeiten), "Mo bis Fr: 08.00 bis 12.00, 13.30 bis 17.00 | Sa bis So: geschlossen");
+  assert.equal(zeitenKurz(einstellungen.oeffnungszeiten), "Mo bis Fr: 08.00 bis 12.00, 13.30 bis 17.00 | Sa: geschlossen");
+  // Sonntag ist auf der Quellwebsite nicht genannt und wird deshalb nicht angezeigt.
+  assert.equal(einstellungen.oeffnungszeiten.woche.some((tag) => tag.tag === "Sonntag"), false);
 });
 
 test("datumLang gibt das Datum der Gästebucheinträge auf Deutsch ohne Zeitzonenversatz aus", () => {

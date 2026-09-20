@@ -25,7 +25,7 @@ export function Einwilligungsverwaltung() {
       setMeldung("Speichern nicht möglich: Ihr Browser erlaubt keinen lokalen Speicher. Es bleibt bei «nichts erlaubt».");
       return;
     }
-    setMeldung(dienste.length === 0 ? "Gespeichert: keine externen Dienste erlaubt. Eine allfällige Karte wurde entfernt." : `Gespeichert: ${dienste.map((d) => DIENSTE.find((e) => e.id === d)?.name).join(", ")} erlaubt.`);
+    setMeldung(dienste.length === 0 ? "Keine Zustimmung gespeichert: Der Eintrag wurde gelöscht, eine allfällige Karte entfernt." : `Gespeichert: ${dienste.map((d) => DIENSTE.find((e) => e.id === d)?.name).join(", ")} erlaubt.`);
   };
 
   const zeitpunkt = gespeichert?.zeitpunkt ? new Date(gespeichert.zeitpunkt).toLocaleString("de-CH") : null;

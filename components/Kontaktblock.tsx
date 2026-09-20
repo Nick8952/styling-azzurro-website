@@ -37,7 +37,7 @@ export function Kontaktblock({ kontakt, mitAnreise = true }: Props) {
           <address className={stile.adresse}>
             {kontakt.betriebsname}
             <br />
-            {kontakt.inhaberin}
+            {kontakt.ansprechperson}
             <br />
             {kontakt.strasse}
             <br />

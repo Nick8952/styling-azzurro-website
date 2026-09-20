@@ -11,11 +11,11 @@ export const kontaktseite: Kontaktseite = {
     beschreibung: "Kontakt zu Coiffeur Styling Azzurro, Antonella Rullo, Winterthurerstrasse 659, 8051 Zürich. Telefon 044 321 20 35, E-Mail styling.azzurro@gmx.ch.",
   },
   titel: "Kontakt",
-  einleitung: "Am schnellsten erreichen Sie uns telefonisch. Für alles andere schreiben Sie uns eine E-Mail.",
+  einleitung: "Termine vergeben wir am Telefon. Für alles andere schreiben Sie uns eine E-Mail.",
   terminTitel: "Termin vereinbaren",
   terminText: text(
     "Termine vergeben wir telefonisch unter **044 321 20 35**, Montag bis Freitag von 8.00 bis 12.00 und von 13.30 bis 17.00 Uhr.",
-    "Eine Online-Terminbuchung gibt es nicht."
+    "Diese Website bietet keine Online-Terminbuchung an."
   ),
   formularTitel: "Nachricht schreiben",
   formularText:

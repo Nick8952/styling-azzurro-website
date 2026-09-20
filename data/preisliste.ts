@@ -68,5 +68,5 @@ export const preisliste: Preisliste = {
     },
   ],
   hinweise: ["Preise ohne Pflege- sowie Styling-Produkte.", "Je nach Aufwand wird der Preis angepasst."],
-  quelle: "Preisliste der bisherigen Website www.styling-azzurro.ch/preisliste/ (Stand 20.09.2026)",
+  quelle: "Preisliste der bisherigen Website www.styling-azzurro.ch/preisliste/, abgerufen am 20.09.2026. Das dortige Preisbild stammt von 2022; ob die Preise noch aktuell sind, ist nicht bestätigt",
 };

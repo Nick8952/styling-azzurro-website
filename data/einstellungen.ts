@@ -11,7 +11,7 @@ export const einstellungen: Websiteeinstellungen = {
     "Coiffeur Styling Azzurro an der Winterthurerstrasse 659 in Zürich: Antonella Rullo und Ida Patella schneiden, föhnen, färben und stylen für Damen, Herren und Kinder. Termine telefonisch unter 044 321 20 35.",
   kontakt: {
     betriebsname: "Coiffeur Styling Azzurro",
-    inhaberin: "Antonella Rullo",
+    ansprechperson: "Antonella Rullo",
     strasse: "Winterthurerstrasse 659",
     plz: "8051",
     ort: "Zürich",
@@ -33,11 +33,10 @@ export const einstellungen: Websiteeinstellungen = {
       { tag: "Donnerstag", geschlossen: false, zeiten: [{ von: "08.00", bis: "12.00" }, { von: "13.30", bis: "17.00" }] },
       { tag: "Freitag", geschlossen: false, zeiten: [{ von: "08.00", bis: "12.00" }, { von: "13.30", bis: "17.00" }] },
       { tag: "Samstag", geschlossen: true, zeiten: [] },
-      { tag: "Sonntag", geschlossen: true, zeiten: [] },
     ],
     sonderzeiten: [],
     terminHinweis: "Termine vereinbaren Sie telefonisch.",
-    quelle: "Startseite der bisherigen Website (Montag bis Freitag 8.00 bis 12.00 und 13.30 bis 17.00 Uhr, Samstag geschlossen). Sonntag ist dort nicht genannt und wird als geschlossen angezeigt.",
+    quelle: "Startseite der bisherigen Website (Montag bis Freitag 8.00 bis 12.00 und 13.30 bis 17.00 Uhr, Samstag geschlossen). Sonntag ist dort nicht genannt und wird deshalb nicht angezeigt.",
   },
   hauptnavigation: [
     { beschriftung: "Team", ziel: "/team/" },

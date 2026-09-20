@@ -92,14 +92,16 @@ export function Galerie({ bilder, ohneVergroesserung = false }: Props) {
           aria-label="Vergrössertes Bild"
           onClose={schliessen}
           onClick={(ereignis) => {
-            // Klick auf den Hintergrund (nicht auf Inhalt) schliesst
-            if (ereignis.target === dialogRef.current) schliessen();
+            // Klick auf den Hintergrund (Dialog oder seine Innenfläche, nicht auf Bild/Knöpfe) schliesst
+            const ziel = ereignis.target as HTMLElement;
+            if (ziel === dialogRef.current || ziel.classList.contains(stile.dialogInhalt)) schliessen();
           }}
         >
           {aktiv !== null && (
             <div className={stile.dialogInhalt}>
               <figure className={stile.gross}>
-                <Bild bild={bilder[aktiv]} sizes="100vw" className={stile.grossBild} />
+                {/* Beschreibung steht in der Bildlegende; das Bild selbst bleibt für Vorleser stumm, sonst hört man sie doppelt. */}
+                <Bild bild={{ ...bilder[aktiv], alt: "" }} sizes="100vw" className={stile.grossBild} />
                 <figcaption className={stile.grossLegende}>
                   {bilder[aktiv].alt}
                   <span className={stile.zaehler}>

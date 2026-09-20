@@ -64,6 +64,7 @@ export const fliesstext = defineType({
         { title: "Absatz", value: "normal" },
         { title: "Zwischentitel", value: "h2" },
         { title: "Kleiner Zwischentitel", value: "h3" },
+        { title: "Kleinster Zwischentitel", value: "h4" },
         { title: "Zitat", value: "blockquote" },
       ],
       lists: [
@@ -86,7 +87,12 @@ export const fliesstext = defineType({
                 title: "Adresse",
                 type: "string",
                 description: "Vollständige Adresse (https://…), interne Seite (/preisliste/), E-Mail (mailto:…) oder Telefon (tel:…).",
-                validation: (regel) => regel.required(),
+                validation: (regel) =>
+                  regel.required().custom((wert) =>
+                    typeof wert === "string" && /^(\/(?!\/)|https?:\/\/|mailto:|tel:)/i.test(wert)
+                      ? true
+                      : "Erlaubt sind /seite/, https://…, mailto:… und tel:…"
+                  ),
               }),
               defineField({ name: "extern", title: "In neuem Fenster öffnen", type: "boolean", initialValue: false }),
             ],
@@ -121,12 +127,12 @@ export const kontakt = defineType({
   type: "object",
   fields: [
     defineField({ name: "betriebsname", title: "Name des Salons", type: "string", validation: (regel) => regel.required() }),
-    defineField({ name: "inhaberin", title: "Inhaberin / Ansprechperson", type: "string", validation: (regel) => regel.required() }),
+    defineField({ name: "ansprechperson", title: "Ansprechperson", type: "string", description: "Name, der unter dem Salonnamen erscheint (Kontakt, Fuss, Impressum).", validation: (regel) => regel.required() }),
     defineField({ name: "strasse", title: "Strasse und Nummer", type: "string", validation: (regel) => regel.required() }),
     defineField({ name: "plz", title: "PLZ", type: "string", validation: (regel) => regel.required().regex(/^\d{4}$/, { name: "vierstellige PLZ" }) }),
     defineField({ name: "ort", title: "Ort", type: "string", validation: (regel) => regel.required() }),
     defineField({ name: "quartier", title: "Quartier", type: "string", description: "Optional, z. B. Zürich-Schwamendingen." }),
-    defineField({ name: "land", title: "Land", type: "string", initialValue: "Schweiz" }),
+    defineField({ name: "land", title: "Land", type: "string", initialValue: "Schweiz", validation: (regel) => regel.required() }),
     defineField({
       name: "telefon",
       title: "Telefon (Anzeige)",
@@ -144,7 +150,7 @@ export const kontakt = defineType({
       description: "Google-Maps-Adresse für «Route planen». Öffnet extern, bettet nichts ein.",
       validation: (regel) => regel.required(),
     }),
-    defineField({ name: "oev", title: "Anreise mit dem ÖV", type: "string", description: "Z. B. «Tram 9, Haltestelle Luegisland»." }),
+    defineField({ name: "oev", title: "Anreise mit dem ÖV", type: "string", description: "Z. B. «Tram 9, Haltestelle Luegisland».", validation: (regel) => regel.required() }),
   ],
 });
 
@@ -216,17 +222,19 @@ export const oeffnungszeiten = defineType({
       title: "Wochentage",
       type: "array",
       of: [defineArrayMember({ type: "tageszeit" })],
+      description: "Nur Tage aufführen, zu denen eine Angabe vorliegt (z. B. Montag bis Samstag).",
       validation: (regel) =>
         regel
           .required()
-          .length(7)
+          .min(1)
+          .max(7)
           .custom((wert) => {
             const tage = (wert ?? []).map((eintrag) => (eintrag as { tag?: string }).tag);
-            return wochentage.every((tag) => tage.includes(tag)) ? true : "Alle sieben Wochentage genau einmal aufführen.";
+            return new Set(tage).size === tage.length ? true : "Jeder Wochentag höchstens einmal.";
           }),
     }),
     defineField({ name: "sonderzeiten", title: "Sonderöffnungszeiten", type: "array", of: [defineArrayMember({ type: "sonderzeit" })] }),
-    defineField({ name: "terminHinweis", title: "Hinweis zur Terminvereinbarung", type: "string", initialValue: "Termine vereinbaren Sie telefonisch." }),
+    defineField({ name: "terminHinweis", title: "Hinweis zur Terminvereinbarung", type: "string", initialValue: "Termine vereinbaren Sie telefonisch.", validation: (regel) => regel.required() }),
     defineField({ name: "quelle", title: "Herkunft der Angaben", type: "string", description: "Intern. Woher die Zeiten stammen." }),
   ],
 });

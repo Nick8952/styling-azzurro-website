@@ -51,5 +51,7 @@ export function StrukturierteDaten({ einstellungen }: Props) {
       ),
     ...(kontakt.facebook ? { sameAs: [kontakt.facebook, kontakt.website] } : { sameAs: [kontakt.website] }),
   };
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(daten) }} />;
+  // «<» wird maskiert, damit ein CMS-Text wie «</script>» das Element nie beenden kann.
+  const json = JSON.stringify(daten).replace(/</g, "\\u003c");
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />;
 }

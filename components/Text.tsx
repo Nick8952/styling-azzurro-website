@@ -7,6 +7,18 @@ type Props = {
   className?: string;
 };
 
+/**
+ * Erlaubte Linkziele: interne Pfade, https/http (extern, neues Fenster), mailto und
+ * tel. Alles andere wird nicht verlinkt. «Extern» wird aus der Adresse abgeleitet,
+ * nicht aus einem gesetzten Flag, damit ein vergessenes Häkchen im CMS nichts ändert.
+ */
+function linkArt(href: string): "intern" | "extern" | "protokoll" | "keiner" {
+  if (/^\/(?!\/)/.test(href) || href.startsWith("#")) return "intern";
+  if (/^https?:\/\//i.test(href)) return "extern";
+  if (/^(mailto|tel):/i.test(href)) return "protokoll";
+  return "keiner";
+}
+
 function span(eintrag: TextSpan, markDefs: Markierung[]): ReactNode {
   let knoten: ReactNode = eintrag.text;
   // Harte Zeilenumbrüche innerhalb eines Blocks bleiben erhalten.
@@ -27,19 +39,27 @@ function span(eintrag: TextSpan, markDefs: Markierung[]): ReactNode {
     } else {
       const definition = markDefs.find((eintrag) => eintrag._key === mark);
       if (definition?._type === "link") {
-        knoten = definition.extern ? (
-          <a key={mark} href={definition.href} rel="noopener noreferrer" target="_blank">
-            {knoten}
-          </a>
-        ) : definition.href.startsWith("mailto:") || definition.href.startsWith("tel:") ? (
-          <a key={mark} href={definition.href}>
-            {knoten}
-          </a>
-        ) : (
-          <Link key={mark} href={definition.href}>
-            {knoten}
-          </Link>
-        );
+        const art = linkArt(definition.href);
+        if (art === "intern") {
+          knoten = (
+            <Link key={mark} href={definition.href}>
+              {knoten}
+            </Link>
+          );
+        } else if (art === "extern") {
+          knoten = (
+            <a key={mark} href={definition.href} rel="noopener noreferrer" target="_blank">
+              {knoten}
+            </a>
+          );
+        } else if (art === "protokoll") {
+          knoten = (
+            <a key={mark} href={definition.href}>
+              {knoten}
+            </a>
+          );
+        }
+        // unbekanntes Protokoll (javascript:, data:, //…): bleibt reiner Text
       } else if (definition?._type === "telefon") {
         knoten = (
           <a key={mark} href={`tel:${definition.nummer.replace(/[^\d+]/g, "")}`}>

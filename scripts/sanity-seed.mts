@@ -21,6 +21,7 @@
  */
 import { createClient } from "@sanity/client";
 import { createInterface } from "node:readline/promises";
+import { existsSync, readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { basename, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -39,6 +40,18 @@ import { bildmanifest } from "../lib/bilder/manifest";
 import type { Bildverweis } from "../lib/inhalt/typen";
 
 const wurzel = join(dirname(fileURLToPath(import.meta.url)), "..");
+
+// .env.local wie Next lesen (tsx lädt sie nicht selbst). Bereits gesetzte Variablen gewinnen.
+const envDatei = join(wurzel, ".env.local");
+if (existsSync(envDatei)) {
+  for (const zeile of readFileSync(envDatei, "utf8").split(/\r?\n/)) {
+    const treffer = /^\s*([A-Z0-9_]+)\s*=\s*(.*?)\s*$/.exec(zeile);
+    if (!treffer || zeile.trim().startsWith("#")) continue;
+    const wert = treffer[2].replace(/^(['"])(.*)\1$/, "$2");
+    if (wert && process.env[treffer[1]] === undefined) process.env[treffer[1]] = wert;
+  }
+}
+
 const argumente = new Set(process.argv.slice(2));
 const trockenlauf = argumente.has("--trockenlauf");
 const aktualisieren = argumente.has("--aktualisieren");
@@ -117,10 +130,35 @@ const mitKeys = <T extends object>(liste: readonly T[], praefix: string) => list
 
 type Dokument = { _id: string; _type: string } & Record<string, unknown>;
 
-async function dokumente(): Promise<Dokument[]> {
-  const liste: Dokument[] = [];
+/** Alle IDs, die dieser Lauf erzeugen würde; deterministisch, deshalb vor dem Bauen bekannt. */
+function alleIds(): string[] {
+  return [
+    "websiteEinstellungen",
+    "startseite",
+    "teamseite",
+    "salonseite",
+    "preisliste",
+    "gaestebuchseite",
+    ...gaestebuch.eintraege.map((e) => `gaestebuch-${e.nummer}`),
+    "lageplan",
+    "kontaktseite",
+    ...rechtstexte.map((t) => `rechtstext-${t.art}`),
+    ...seiten.map((s) => `seite-${s.slug}`),
+  ];
+}
 
-  liste.push({
+/**
+ * Baut nur die Dokumente, die geschrieben werden (`schreiben(id)`), damit für
+ * übersprungene Dokumente keine Bilder hochgeladen werden.
+ */
+async function dokumente(schreiben: (id: string) => boolean): Promise<Dokument[]> {
+  const liste: Dokument[] = [];
+  const hinzufuegen = async (id: string, bauen: () => Promise<Dokument> | Dokument) => {
+    if (!schreiben(id)) return;
+    liste.push(await bauen());
+  };
+
+  await hinzufuegen("websiteEinstellungen", () => ({
     _id: "websiteEinstellungen",
     _type: "websiteEinstellungen",
     name: einstellungen.name,
@@ -136,9 +174,9 @@ async function dokumente(): Promise<Dokument[]> {
     },
     hauptnavigation: mitKeys(einstellungen.hauptnavigation, "nav"),
     rechtsnavigation: mitKeys(einstellungen.rechtsnavigation, "recht"),
-  });
+  }));
 
-  liste.push({
+  await hinzufuegen("startseite", async () => ({
     _id: "startseite",
     _type: "startseite",
     ...startseite,
@@ -146,32 +184,32 @@ async function dokumente(): Promise<Dokument[]> {
     teamBild: await bild(startseite.teamBild),
     salonBilder: await bilder(startseite.salonBilder),
     preisAuszug: mitKeys(startseite.preisAuszug.map((p) => ({ _type: "preisverweis", ...p })), "preis"),
-  });
+  }));
 
-  liste.push({
+  await hinzufuegen("teamseite", async () => ({
     _id: "teamseite",
     _type: "teamseite",
     ...team,
     mitglieder: await Promise.all(team.mitglieder.map(async ({ bild: portrait, ...m }, i) => ({ _key: `mitglied-${i}`, _type: "teammitglied", ...m, ...(portrait ? { bild: await bild(portrait) } : {}) }))),
     bilder: await bilder(team.bilder),
-  });
+  }));
 
-  liste.push({ _id: "salonseite", _type: "salonseite", ...salon, galerie: await bilder(salon.galerie) });
+  await hinzufuegen("salonseite", async () => ({ _id: "salonseite", _type: "salonseite", ...salon, galerie: await bilder(salon.galerie) }));
 
-  liste.push({
+  await hinzufuegen("preisliste", () => ({
     _id: "preisliste",
     _type: "preisliste",
     ...preisliste,
     kategorien: preisliste.kategorien.map((k, i) => ({ _key: `kat-${i}`, _type: "preiskategorie", titel: k.titel, positionen: k.positionen.map((p, j) => ({ _key: `pos-${i}-${j}`, _type: "preisposition", ...p })) })),
-  });
+  }));
 
   const { eintraege, ...gaestebuchSeite } = gaestebuch;
-  liste.push({ _id: "gaestebuchseite", _type: "gaestebuchseite", ...gaestebuchSeite });
+  await hinzufuegen("gaestebuchseite", () => ({ _id: "gaestebuchseite", _type: "gaestebuchseite", ...gaestebuchSeite }));
   for (const eintrag of eintraege) {
-    liste.push({ _id: `gaestebuch-${eintrag.nummer}`, _type: "gaestebucheintrag", ...eintrag, datum: `${eintrag.datum}:00Z` });
+    await hinzufuegen(`gaestebuch-${eintrag.nummer}`, () => ({ _id: `gaestebuch-${eintrag.nummer}`, _type: "gaestebucheintrag", ...eintrag, datum: `${eintrag.datum}:00Z` }));
   }
 
-  liste.push({
+  await hinzufuegen("lageplan", () => ({
     _id: "lageplan",
     _type: "lageplan",
     seo: lageplan.seo,
@@ -181,20 +219,22 @@ async function dokumente(): Promise<Dokument[]> {
     karteTitel: lageplan.karte.titel,
     anreiseTitel: lageplan.anreiseTitel,
     anreise: lageplan.anreise,
-  });
+  }));
 
-  liste.push({ _id: "kontaktseite", _type: "kontaktseite", ...kontaktseite });
+  await hinzufuegen("kontaktseite", () => ({ _id: "kontaktseite", _type: "kontaktseite", ...kontaktseite }));
 
-  for (const text of rechtstexte) liste.push({ _id: `rechtstext-${text.art}`, _type: "rechtstext", ...text });
+  for (const text of rechtstexte) await hinzufuegen(`rechtstext-${text.art}`, () => ({ _id: `rechtstext-${text.art}`, _type: "rechtstext", ...text }));
 
   for (const seite of seiten) {
-    const bausteine = [];
-    for (const baustein of seite.bausteine) {
-      if (baustein._type === "bildblock") bausteine.push({ ...baustein, bild: await bild(baustein.bild) });
-      else if (baustein._type === "galerieblock") bausteine.push({ ...baustein, bilder: await bilder(baustein.bilder) });
-      else bausteine.push(baustein);
-    }
-    liste.push({ _id: `seite-${seite.slug}`, _type: "seite", titel: seite.titel, slug: { _type: "slug", current: seite.slug }, einleitung: seite.einleitung, inNavigation: seite.inNavigation, seo: seite.seo, bausteine });
+    await hinzufuegen(`seite-${seite.slug}`, async () => {
+      const bausteine = [];
+      for (const baustein of seite.bausteine) {
+        if (baustein._type === "bildblock") bausteine.push({ ...baustein, bild: await bild(baustein.bild) });
+        else if (baustein._type === "galerieblock") bausteine.push({ ...baustein, bilder: await bilder(baustein.bilder) });
+        else bausteine.push(baustein);
+      }
+      return { _id: `seite-${seite.slug}`, _type: "seite", titel: seite.titel, slug: { _type: "slug", current: seite.slug }, einleitung: seite.einleitung, inNavigation: seite.inNavigation, seo: seite.seo, bausteine };
+    });
   }
 
   return liste;
@@ -202,26 +242,23 @@ async function dokumente(): Promise<Dokument[]> {
 
 /* ------------------------------------------------------------------ Lauf */
 
-const alle = await dokumente();
-const vorhanden = new Set<string>(
-  trockenlauf ? [] : await client.fetch<string[]>(`*[_id in $ids]._id`, { ids: alle.map((d) => d._id) })
-);
+// Zuerst nachsehen, was es schon gibt; erst dann bauen (und Bilder hochladen).
+const ids = alleIds();
+const vorhanden = new Set<string>(await client.fetch<string[]>(`*[_id in $ids]._id`, { ids }));
+const uebersprungen = ids.filter((id) => vorhanden.has(id) && !aktualisieren);
+for (const id of uebersprungen) console.log(`  vorhanden, unverändert: ${id}`);
 
-console.log(`\n${alle.length} Dokumente vorbereitet, ${vorhanden.size} davon existieren bereits.`);
+const alle = await dokumente((id) => !vorhanden.has(id) || aktualisieren);
+
+console.log(`\n${ids.length} Dokumente insgesamt, ${vorhanden.size} existieren bereits, ${alle.length} werden geschrieben.`);
 let angelegt = 0;
 let ersetzt = 0;
-let uebersprungen = 0;
 const transaktion = client.transaction();
 for (const dokument of alle) {
   if (vorhanden.has(dokument._id)) {
-    if (aktualisieren) {
-      transaktion.createOrReplace(dokument);
-      ersetzt += 1;
-      console.log(`  ersetzen: ${dokument._id}`);
-    } else {
-      uebersprungen += 1;
-      console.log(`  vorhanden, unverändert: ${dokument._id}`);
-    }
+    transaktion.createOrReplace(dokument);
+    ersetzt += 1;
+    console.log(`  ersetzen: ${dokument._id}`);
   } else {
     transaktion.createIfNotExists(dokument);
     angelegt += 1;
@@ -230,10 +267,10 @@ for (const dokument of alle) {
 }
 
 if (trockenlauf) {
-  console.log(`\n[Trockenlauf] Nichts geschrieben. Würde anlegen: ${angelegt}, ersetzen: ${ersetzt}, unverändert: ${uebersprungen}.`);
+  console.log(`\n[Trockenlauf] Nichts geschrieben. Würde anlegen: ${angelegt}, ersetzen: ${ersetzt}, unverändert: ${uebersprungen.length}.`);
 } else if (angelegt + ersetzt === 0) {
   console.log("\nNichts zu tun.");
 } else {
   await transaktion.commit();
-  console.log(`\nFertig: ${angelegt} angelegt, ${ersetzt} ersetzt, ${uebersprungen} unverändert. Dokumente sind als Entwürfe/veröffentlicht gemäss Sanity-Standard; im Studio prüfen und veröffentlichen.`);
+  console.log(`\nFertig: ${angelegt} angelegt, ${ersetzt} ersetzt, ${uebersprungen.length} unverändert. Dokumente sind als Entwürfe/veröffentlicht gemäss Sanity-Standard; im Studio prüfen und veröffentlichen.`);
 }

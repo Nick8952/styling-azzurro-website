@@ -33,7 +33,7 @@ const impressum: Rechtstext = {
     "## Dargestellter Salon",
     "Die gezeigten Angaben beziehen sich auf:",
     "Coiffeur Styling Azzurro",
-    "Antonella Rullo",
+    "Ansprechperson: Antonella Rullo",
     "Winterthurerstrasse 659, 8051 Zürich",
     "Telefon: [044 321 20 35](tel:+41443212035)",
     "E-Mail: [styling.azzurro@gmx.ch](mailto:styling.azzurro@gmx.ch)",
@@ -84,7 +84,7 @@ const datenschutz: Rechtstext = {
     "Ohne Karte bleibt der Weg zum Salon trotzdem auffindbar: Adresse, Tramhaltestelle und ein Routenlink stehen als Text auf derselben Seite.",
 
     "## Kontaktformular und Gästebuch",
-    "Das Kontaktformular sendet nichts an einen Server. Es setzt aus Ihren Eingaben eine E-Mail zusammen und öffnet damit Ihr eigenes E-Mail-Programm. Erst wenn Sie dort selbst auf «Senden» drücken, geht die Nachricht an den Salon. Ihre Eingaben verlassen den Browser bis dahin nicht und werden nirgends gespeichert.",
+    "Das Kontaktformular sendet nichts an einen Server dieser Website. Beim Betätigen von «E-Mail vorbereiten» werden Ihre Eingaben an Ihr E-Mail-Programm oder Ihren Webmail-Dienst übergeben, der daraus einen Entwurf erstellt. Ob und wann dieser Entwurf gespeichert oder synchronisiert wird, richtet sich nach diesem Programm. Über das Internet an den Salon versendet wird die Nachricht erst, wenn Sie sie dort abschicken. Diese Website selbst speichert Ihre Eingaben nicht.",
     "Neue Gästebucheinträge lassen sich in dieser Vorschau ebenfalls nur per E-Mail einreichen; es gibt keine Kommentarfunktion und keinen Dienst, der Eingaben speichert.",
     "Was nach dem Versand mit Ihrer E-Mail geschieht, liegt bei Ihrem E-Mail-Anbieter und beim Empfänger.",
 
@@ -100,7 +100,7 @@ const datenschutz: Rechtstext = {
 
     "## Ihre Rechte",
     "Nach dem Schweizer Datenschutzgesetz (DSG) haben Sie gegenüber der verantwortlichen Person insbesondere das Recht auf Auskunft über bearbeitete Personendaten sowie auf Berichtigung oder Löschung. Soweit die Datenschutz-Grundverordnung der EU (DSGVO) auf Sie anwendbar ist, kommen die dort vorgesehenen Rechte hinzu, unter anderem Einschränkung der Bearbeitung, Datenübertragbarkeit und Widerspruch.",
-    "Da diese Vorschau selbst keine Personendaten speichert, betreffen solche Anfragen praktisch nur E-Mails, die Sie mir schreiben. Richten Sie sie an [holzbechernick@gmail.com](mailto:holzbechernick@gmail.com).",
+    "Diese Vorschau speichert ausser der freiwillig gemerkten Karten-Zustimmung in Ihrem eigenen Browser keine Personendaten; solche Anfragen betreffen deshalb praktisch nur E-Mails, die Sie mir schreiben. Richten Sie sie an [holzbechernick@gmail.com](mailto:holzbechernick@gmail.com).",
     "Sie können sich ausserdem beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten ([EDÖB](https://www.edoeb.admin.ch/)) melden.",
 
     "## Änderungen",

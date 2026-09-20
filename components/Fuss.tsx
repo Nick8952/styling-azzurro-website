@@ -23,7 +23,7 @@ export function Fuss({ einstellungen, zusatznavigation }: Props) {
         <div className={stile.spalte}>
           <h2 className={stile.titel}>{einstellungen.name}</h2>
           <address className={stile.adresse}>
-            {kontakt.inhaberin}
+            {kontakt.ansprechperson}
             <br />
             {kontakt.strasse}
             <br />

@@ -3,11 +3,11 @@ import type { ReactNode } from "react";
 import { Fuss } from "@/components/Fuss";
 import { Kopf } from "@/components/Kopf";
 import { ladeRahmen } from "@/lib/inhalt/seiten";
-import { seiteUrl } from "@/lib/seite-url";
+import { metadatenBasis } from "@/lib/seite-url";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: seiteUrl,
+  metadataBase: metadatenBasis,
   title: {
     default: "Coiffeur Styling Azzurro, Zürich",
     template: "%s | Coiffeur Styling Azzurro",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "de_CH",
     siteName: "Coiffeur Styling Azzurro",
-    images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "Coiffeur Styling Azzurro" }],
+    // Bild kommt aus app/opengraph-image.png (Dateikonvention); Next ergänzt den Unterpfad.
   },
   formatDetection: { telephone: true, email: true, address: true },
 };

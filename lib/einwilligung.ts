@@ -36,9 +36,18 @@ export function lesen(): Einwilligung | null {
     const roh = window.localStorage.getItem(SCHLUESSEL);
     if (!roh) return null;
     const wert = JSON.parse(roh) as Einwilligung;
-    if (!wert || wert.version !== VERSION || typeof wert.dienste !== "object") return null;
+    if (!wert || wert.version !== VERSION || typeof wert.dienste !== "object") {
+      // Veraltet oder defekt: entfernen, damit «nichts gespeichert» auch stimmt.
+      window.localStorage.removeItem(SCHLUESSEL);
+      return null;
+    }
     return wert;
   } catch {
+    try {
+      window.localStorage.removeItem(SCHLUESSEL);
+    } catch {
+      // Speicher nicht verfügbar
+    }
     return null;
   }
 }

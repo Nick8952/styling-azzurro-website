@@ -30,12 +30,22 @@ for (const route of routen) {
     fehler.push(`${route}: Status ${antwort.status}`);
     continue;
   }
-  const html = await antwort.text();
+  // Next fügt <link rel="preconnect" href="/"> ein: gleicher Ursprung, unproblematisch.
+  const html = (await antwort.text()).replace(/<link rel="preconnect"[^>]*>/g, "");
   if (!/<meta name="robots" content="noindex/.test(html)) fehler.push(`${route}: kein noindex`);
   if (!/<title>[^<]+<\/title>/.test(html)) fehler.push(`${route}: kein Titel`);
   const verweise = [...html.matchAll(/(?:href|src)="([^"]+)"/g)].map((t) => t[1]).filter((v) => v.startsWith("/") && !v.startsWith("//"));
   for (const verweis of verweise) {
     if (!verweis.startsWith(unterpfad + "/") && verweis !== unterpfad) fehler.push(`${route}: Verweis ohne Unterpfad: ${verweis}`);
+  }
+  // Open-Graph-Bild: absolute Adresse, muss abrufbar sein und den Unterpfad genau einmal enthalten
+  const og = /property="og:image" content="([^"]+)"/.exec(html)?.[1];
+  if (!og) fehler.push(`${route}: kein og:image`);
+  else if (unterpfad && og.split(unterpfad + "/").length !== 2) fehler.push(`${route}: og:image mit falschem Unterpfad: ${og}`);
+  else if (!geprueft.has(og)) {
+    geprueft.add(og);
+    const r = await abrufen(og);
+    if (r.status !== 200) fehler.push(`${route}: og:image ${og} -> ${r.status}`);
   }
   const dateien = verweises(html);
   for (const datei of dateien) {

@@ -2,7 +2,8 @@ import { bild } from "@/lib/inhalt/bild";
 import type { TeamseiteRoh } from "@/lib/inhalt/lokal-typen";
 
 /**
- * Team. Belegt sind genau zwei Namen (Startseite: «Antonella Rullo und Ida
+ * Team. Rollen werden nicht angegeben: Die Quellwebsite nennt keine; «Inhaberin»
+ * sagt nur eine Kundin im Gästebuch. Belegt sind genau zwei Namen (Startseite: «Antonella Rullo und Ida
  * Patella», Kontaktseite: «Rullo Antonella» als Ansprechperson). Die bisherige
  * Teamseite beschriftet nur ein Foto, und dieses zeigt beide Frauen. Welches
  * Gesicht zu welchem Namen gehört, ist damit nicht belegt. Deshalb keine
@@ -14,9 +15,9 @@ export const team: TeamseiteRoh = {
     beschreibung: "Antonella Rullo und Ida Patella: das Team von Coiffeur Styling Azzurro an der Winterthurerstrasse 659 in Zürich.",
   },
   titel: "Antonella und Ida",
-  einleitung: "Zwei Coiffeusen, ein Salon: Antonella Rullo und Ida Patella freuen sich auf Ihren Besuch.",
+  einleitung: "Antonella Rullo und Ida Patella freuen sich auf Ihren Besuch.",
   mitglieder: [
-    { name: "Antonella Rullo", rolle: "Inhaberin" },
+    { name: "Antonella Rullo" },
     { name: "Ida Patella" },
   ],
   bilder: [

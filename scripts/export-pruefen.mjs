@@ -32,6 +32,12 @@ const basis = index >= 0 && argumente[index + 1] ? argumente[index + 1] : proces
 const fehler = [];
 const warnung = [];
 
+/** Absolute Metadaten-Adressen (og:image) dürfen den Unterpfad nur einmal enthalten. */
+function metadatenPruefen(html, anzeige) {
+  const og = /property="og:image" content="([^"]+)"/.exec(html)?.[1];
+  if (og && basis && og.split(basis + "/").length !== 2) fehler.push(`${anzeige}: og:image mit doppeltem oder fehlendem Unterpfad: ${og}`);
+}
+
 async function alleDateien(ordner) {
   const ergebnis = [];
   for (const eintrag of await readdir(ordner, { withFileTypes: true })) {
@@ -101,6 +107,7 @@ for (const datei of htmlDateien) {
   if (!/<meta name="robots" content="[^"]*noindex/i.test(inhalt)) {
     fehler.push(`${anzeige}: kein noindex im Kopfbereich.`);
   }
+  metadatenPruefen(inhalt, anzeige);
 
   for (const { muster, text } of verbotenesMuster) {
     if (muster.test(inhalt)) fehler.push(`${anzeige}: ${text}.`);

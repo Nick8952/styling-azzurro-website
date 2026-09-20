@@ -13,7 +13,7 @@ export const startseite: StartseiteRoh = {
       "Coiffeur Styling Azzurro an der Winterthurerstrasse 659, 8051 Zürich, an der Tramhaltestelle Luegisland. Antonella Rullo und Ida Patella freuen sich auf Ihren Besuch. Termine unter 044 321 20 35.",
   },
   heroTitel: "Herzlich willkommen bei Styling Azzurro",
-  heroText: "Ihr Coiffeur an der Winterthurerstrasse 659 in Zürich, direkt an der Tramhaltestelle Luegisland.",
+  heroText: "Ihr Coiffeur an der Winterthurerstrasse 659 in Zürich, an der Tramhaltestelle Luegisland.",
   heroBild: bild("schaufenster-neon-quer", "Schaufenster des Salons mit blauer Leuchtschrift «Styling Azzurro»"),
   willkommenTitel: "Für einen Termin rufen Sie uns an",
   willkommenText: text(
@@ -23,7 +23,7 @@ export const startseite: StartseiteRoh = {
   grussformel: "Wir freuen uns auf Ihren Besuch",
   unterzeichnende: "Antonella Rullo und Ida Patella",
   teamTitel: "Antonella und Ida",
-  teamText: "Zwei Coiffeusen, die ihren Salon persönlich führen. Lernen Sie das Team kennen.",
+  teamText: "Zwei Coiffeusen, ein Salon. Lernen Sie das Team kennen.",
   teamBild: bild("team-im-salon-a", "Antonella und Ida nebeneinander im Salon vor dem Spiegel"),
   preiseTitel: "Klare Preise",
   preiseText: "Föhnen, Schneiden, Färben, Tönung, Dauerwelle und Folinemèche für Damen, Herren und Kinder. Ein Auszug; die vollständige Liste finden Sie auf der Preisseite.",
@@ -34,7 +34,7 @@ export const startseite: StartseiteRoh = {
     { kategorie: "Kinder, Jugendliche und Studenten", leistung: "Haarschnitt" },
   ],
   salonTitel: "Mein Geschäft",
-  salonText: "Helle Arbeitsplätze, ein ruhiger Wartebereich und das blaue Leuchtschild im Schaufenster.",
+  salonText: "Helle Arbeitsplätze, ein Wartebereich am Fenster und das blaue Leuchtschild im Schaufenster.",
   salonBilder: [
     bild("salon-uebersicht", "Salon mit Frisierplätzen, Waschsessel und Wandbild einer weissen Mühle am Meer"),
     bild("salon-spiegelplatz", "Frisierplatz mit Blumen vor dem beleuchteten Spiegel"),

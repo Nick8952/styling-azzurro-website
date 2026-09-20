@@ -19,7 +19,7 @@ export const salon: SalonseiteRoh = {
     bild("salon-waschplatz", "Waschplatz mit weissem Waschbecken und Spiegel"),
     bild("salon-empfang", "Empfang mit Produkteregal und Spiegelwand"),
     bild("salon-spiegelplatz", "Frisierplatz mit Blumen vor dem beleuchteten Spiegel"),
-    bild("salon-innen-neon", "Wartebereich mit zwei Sesseln und der Leuchtschrift von innen, weihnachtlich geschmückt"),
+    bild("salon-innen-neon", "Zwei Sessel am Fenster mit der Leuchtschrift von innen, weihnachtlich geschmückt"),
     bild("produkte-regal-a", "Beleuchtetes Regal mit Haarpflegeprodukten"),
     bild("produkte-regal-b", "Regal mit Pflege- und Stylingprodukten"),
     bild("kundin-im-stuhl", "Kundin sitzt lächelnd im Frisierstuhl"),

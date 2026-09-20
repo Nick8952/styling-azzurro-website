@@ -70,8 +70,8 @@ export type Bildverweis = { schluessel: string; alt: string; legende?: string };
 
 export type Kontakt = {
   betriebsname: string;
-  /** Inhaberin laut Kontaktseite der Quellwebsite. */
-  inhaberin: string;
+  /** Ansprechperson laut Kontaktseite der Quellwebsite («Rullo Antonella»). Keine Rolle, weil nicht belegt. */
+  ansprechperson: string;
   strasse: string;
   plz: string;
   ort: string;
@@ -175,7 +175,7 @@ export type Startseite = {
 
 export type Teammitglied = {
   name: string;
-  /** Rolle nur, wenn belegt (Inhaberin laut Kontaktseite). Sonst leer. */
+  /** Rolle nur, wenn vom Salon belegt. Sonst leer. */
   rolle?: string;
   /** Einzelporträt nur, wenn die Zuordnung belegt ist. */
   bild?: Bild;

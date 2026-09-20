@@ -51,8 +51,29 @@ export function Navigation({ punkte, telefon, telefonLink, oeffnungszeiten }: Pr
     return aktuell === ziel;
   };
 
+  // DOM-Reihenfolge: Telefon, Menüknopf, dann die Liste. So führt Tab nach dem
+  // Öffnen direkt in das Menü. Auf dem Desktop stellt CSS (order) die Liste vor den Telefonknopf.
   return (
     <nav className={stile.nav} aria-label="Hauptnavigation">
+
+      <a className={`knopf knopf-primaer ${stile.telefon}`} href={telefonLink} aria-label={`Anrufen: ${telefon}`}>
+        <PhoneIcon aria-hidden="true" size={18} weight="regular" />
+        <span className={stile.telefonText}>Anrufen</span>
+        <span className={stile.telefonNummer}>{telefon}</span>
+      </a>
+
+      <button
+        ref={knopfRef}
+        type="button"
+        className={stile.menueknopf}
+        aria-expanded={offen}
+        aria-controls={flaecheId}
+        onClick={() => setOffen((wert) => !wert)}
+      >
+        <span className={stile.balken} aria-hidden="true" />
+        <span className="nur-vorlesen">{offen ? "Menü schliessen" : "Menü öffnen"}</span>
+      </button>
+
       <ul className={[stile.liste, offen ? stile.offen : ""].join(" ")} id={flaecheId}>
         {punkte.map((punkt) => (
           <li key={punkt.ziel}>
@@ -74,24 +95,6 @@ export function Navigation({ punkte, telefon, telefonLink, oeffnungszeiten }: Pr
           <p className={stile.zeiten}>{zeitenKurz(oeffnungszeiten)}</p>
         </li>
       </ul>
-
-      <a className={`knopf knopf-primaer ${stile.telefon}`} href={telefonLink} aria-label={`Anrufen: ${telefon}`}>
-        <PhoneIcon aria-hidden="true" size={18} weight="regular" />
-        <span className={stile.telefonText}>Anrufen</span>
-        <span className={stile.telefonNummer}>{telefon}</span>
-      </a>
-
-      <button
-        ref={knopfRef}
-        type="button"
-        className={stile.menueknopf}
-        aria-expanded={offen}
-        aria-controls={flaecheId}
-        onClick={() => setOffen((wert) => !wert)}
-      >
-        <span className={stile.balken} aria-hidden="true" />
-        <span className="nur-vorlesen">{offen ? "Menü schliessen" : "Menü öffnen"}</span>
-      </button>
     </nav>
   );
 }

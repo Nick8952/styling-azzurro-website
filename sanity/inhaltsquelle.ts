@@ -93,7 +93,9 @@ export const sanityInhaltsquelle: Inhaltsquelle = {
     const roh = erwartet(await sanityClient.fetch<RohEinstellungen | null>(einstellungenAbfrage), "Website-Einstellungen");
     return {
       ...roh,
-      kontakt: { ...roh.kontakt, telefonLink: telefonLink(roh.kontakt.telefon) },
+      kurzname: roh.kurzname ?? roh.name,
+      demohinweis: roh.demohinweis ?? "",
+      kontakt: { ...roh.kontakt, website: roh.kontakt.website ?? "", telefonLink: telefonLink(roh.kontakt.telefon) },
       hauptnavigation: roh.hauptnavigation ?? [],
       rechtsnavigation: roh.rechtsnavigation ?? [],
       oeffnungszeiten: { ...roh.oeffnungszeiten, sonderzeiten: roh.oeffnungszeiten.sonderzeiten ?? [] },
@@ -120,6 +122,7 @@ export const sanityInhaltsquelle: Inhaltsquelle = {
     const roh = erwartet(await sanityClient.fetch<RohTeam | null>(teamAbfrage), "Team");
     return {
       ...roh,
+      einleitung: roh.einleitung ?? "",
       mitglieder: (roh.mitglieder ?? []).map(({ bild, ...mitglied }) => {
         const aufgeloest = sanityBild(bild);
         return { ...mitglied, ...(aufgeloest ? { bild: aufgeloest } : {}) };
@@ -173,6 +176,7 @@ export const sanityInhaltsquelle: Inhaltsquelle = {
     const roh = (await sanityClient.fetch<RohSeite[]>(seitenAbfrage)) ?? [];
     return roh.map((seite) => ({
       ...seite,
+      seo: seite.seo ?? { titel: seite.titel, beschreibung: seite.einleitung ?? seite.titel },
       inNavigation: seite.inNavigation === true,
       bausteine: (seite.bausteine ?? []).map(bausteinAufloesen).filter((baustein): baustein is Baustein => baustein !== null),
     }));

@@ -57,7 +57,7 @@ export function Karte({ einbettungsUrl, titel, adresse, routenlink }: Props) {
             src={einbettungsUrl}
             title={titel}
             loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
+            referrerPolicy="no-referrer"
             allowFullScreen
           />
           <div className={stile.leiste}>

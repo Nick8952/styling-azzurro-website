@@ -266,7 +266,7 @@ button {
   font-size: var(--groesse-text);
   line-height: 1.2;
   text-decoration: none;
-  white-space: nowrap;
+  text-align: center;
   transition:
     background-color var(--dauer-kurz) var(--kurve),
     color var(--dauer-kurz) var(--kurve),
@@ -276,6 +276,13 @@ button {
 
 .knopf:active {
   transform: translateY(1px);
+}
+
+/* Ab Tabletbreite bleibt jede Beschriftung einzeilig; darunter darf sie umbrechen statt überlaufen. */
+@media (min-width: 40rem) {
+  .knopf {
+    white-space: nowrap;
+  }
 }
 
 .knopf-primaer {

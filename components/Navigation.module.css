@@ -137,6 +137,8 @@
   border-bottom: 1px solid var(--linie);
   box-shadow: var(--schatten);
   animation: aufklappen var(--dauer) var(--kurve);
+  max-height: calc(100dvh - 4.25rem);
+  overflow-y: auto;
 }
 
 .liste.offen .link {
@@ -173,6 +175,8 @@
   .liste {
     display: flex;
     gap: var(--a-1);
+    /* Im DOM steht die Liste hinter den Knöpfen (Tastaturreihenfolge im Menü); optisch gehört sie davor. */
+    order: -1;
   }
 
   .nurMobil,
