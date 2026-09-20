@@ -1,0 +1,25 @@
+.folge {
+  display: grid;
+  gap: var(--a-8);
+}
+
+.block {
+  display: grid;
+  gap: var(--a-5);
+}
+
+.figur {
+  margin: 0;
+}
+
+.bildRund {
+  border-radius: var(--radius-flaeche);
+}
+
+.legende {
+  margin-top: var(--a-2);
+}
+
+.schmal {
+  max-width: 28rem;
+}

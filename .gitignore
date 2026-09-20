@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+.env
+.env.local
+.env.*.local
+.DS_Store
+.sanity/
+# Originaldateien der Kundenwebsite: werden nur lokal zum Aufbereiten gebraucht.
+# Die ausgelieferten Varianten liegen in public/bilder/. Neu laden: npm run originale
+assets/original/
+# QA-Screenshots entstehen lokal, siehe scripts/screenshots.mjs
+qa/screenshots/

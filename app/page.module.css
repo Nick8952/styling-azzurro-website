@@ -1,0 +1,256 @@
+/* ------------------------------------------------------------------ Hero */
+.hero {
+  display: grid;
+  gap: var(--a-6);
+  padding-top: clamp(var(--a-6), 5vw, var(--a-8));
+  padding-bottom: var(--abschnitt);
+  align-items: center;
+}
+
+.heroText {
+  display: grid;
+  gap: var(--a-5);
+  max-width: 36rem;
+}
+
+.heroText h1 {
+  max-width: 14ch;
+}
+
+.heroBildRahmen {
+  border-radius: var(--radius-flaeche);
+  box-shadow: var(--schatten);
+}
+
+@media (min-width: 64rem) {
+  .hero {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: var(--a-8);
+    padding-top: var(--a-8);
+  }
+
+  .heroText h1 {
+    max-width: 12ch;
+  }
+}
+
+/* ------------------------------------------------------------ Willkommen */
+.willkommen {
+  display: grid;
+  gap: var(--a-6);
+  align-items: start;
+}
+
+.willkommenText {
+  display: grid;
+  gap: var(--a-5);
+  max-width: var(--text-breite);
+}
+
+.gruss {
+  font-size: var(--groesse-lead);
+  line-height: 1.5;
+}
+
+.schild {
+  max-width: 26rem;
+}
+
+@media (min-width: 64rem) {
+  .willkommen {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--a-8);
+  }
+
+  .schild {
+    justify-self: end;
+    width: 100%;
+  }
+}
+
+/* ------------------------------------------------------------------ Team */
+.team {
+  display: grid;
+  gap: var(--a-6);
+  align-items: center;
+}
+
+.teamBild {
+  position: relative;
+  max-width: 28rem;
+}
+
+/* Blaue Platte hinter dem Foto: der eine Akzent dieses Abschnitts */
+.teamBild::before {
+  content: "";
+  position: absolute;
+  inset: var(--a-4) calc(-1 * var(--a-4)) calc(-1 * var(--a-4)) var(--a-4);
+  border-radius: var(--radius-flaeche);
+  background: var(--azzurro-hell);
+  z-index: 0;
+}
+
+.teamBildRahmen {
+  position: relative;
+  z-index: 1;
+  border-radius: var(--radius-flaeche);
+}
+
+.teamText {
+  display: grid;
+  gap: var(--a-4);
+  justify-items: start;
+  max-width: var(--text-breite);
+}
+
+@media (min-width: 64rem) {
+  .team {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: var(--a-9);
+  }
+
+  .teamBild {
+    max-width: none;
+  }
+}
+
+/* ------------------------------------------------------ Abschnittsköpfe */
+.abschnittKopf {
+  display: grid;
+  gap: var(--a-4);
+  margin-bottom: var(--a-6);
+}
+
+/* ---------------------------------------------------------------- Preise */
+.preisraster {
+  list-style: none;
+  margin: 0 0 var(--a-5);
+  padding: 0;
+  display: grid;
+  gap: var(--a-4);
+}
+
+.preisgruppe {
+  display: grid;
+  gap: var(--a-2);
+  padding: var(--a-5);
+  background: var(--papier);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius-flaeche);
+}
+
+.preisKategorie {
+  font-size: var(--groesse-klein);
+  color: var(--tinte-2);
+}
+
+.preisLeistung {
+  font-size: var(--groesse-lead);
+}
+
+.preiszeilen {
+  list-style: none;
+  margin: var(--a-2) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--a-1);
+}
+
+.preiszeile {
+  display: flex;
+  align-items: baseline;
+  gap: var(--a-2);
+  min-height: 1.75rem;
+}
+
+.punkte {
+  flex: 1 1 1rem;
+  min-width: 1rem;
+  border-bottom: 2px dotted var(--linie-stark);
+  transform: translateY(-0.3em);
+}
+
+.preis {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.preishinweis {
+  margin-bottom: var(--a-5);
+}
+
+@media (min-width: 40rem) {
+  .preisraster {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--a-5);
+  }
+}
+
+/* ---------------------------------------------------------------- Mosaik */
+.mosaik {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--a-3);
+  margin-bottom: var(--a-5);
+}
+
+/* Rasterkinder dürfen nicht auf die Bildbreite anwachsen */
+.mosaik > *,
+.hero > *,
+.willkommen > *,
+.team > *,
+.kontakt > * {
+  min-width: 0;
+}
+
+.mosaikGross {
+  grid-column: span 2;
+}
+
+.mosaikBild {
+  border-radius: var(--radius-flaeche);
+}
+
+@media (min-width: 64rem) {
+  .mosaik {
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: var(--a-4);
+  }
+
+  .mosaikGross {
+    grid-column: 1;
+    grid-row: span 2;
+  }
+
+  .mosaikGross .mosaikBild {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+}
+
+.nachLink {
+  margin-top: var(--a-4);
+}
+
+/* --------------------------------------------------------------- Kontakt */
+.kontakt {
+  display: grid;
+  gap: var(--a-6);
+  align-items: start;
+}
+
+.kontakt h2 {
+  margin-bottom: var(--a-4);
+}
+
+.kontakt .lead {
+  margin-bottom: var(--a-5);
+}
+
+@media (min-width: 64rem) {
+  .kontakt {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--a-9);
+  }
+}

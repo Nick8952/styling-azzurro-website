@@ -1,0 +1,22 @@
+.rahmen {
+  transition:
+    opacity var(--dauer) var(--kurve),
+    transform var(--dauer) var(--kurve);
+}
+
+.bereit {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.bereit.sichtbar {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bereit {
+    opacity: 1;
+    transform: none;
+  }
+}

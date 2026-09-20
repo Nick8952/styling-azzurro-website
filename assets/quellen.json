@@ -1,0 +1,200 @@
+{
+  "hinweis": "Herkunft der Originalmedien. Die Originaldateien liegen unter assets/original/ und sind bewusst nicht im Git-Repository (Urheberrecht). Mit 'npm run originale' lassen sie sich aus den unten genannten Quellen erneut laden, danach 'npm run bilder'.",
+  "rechte": "Alle Medien stammen von der bestehenden Website www.styling-azzurro.ch (Jimdo-Medienspeicher). Die Rechte liegen bei Coiffeur Styling Azzurro bzw. den abgebildeten Personen. Die Verwendung erfolgt ausschliesslich für diese unverbindliche Gestaltungsvorschau, die für genau diesen Betrieb erstellt wurde. Vor einem produktiven Einsatz ist die Freigabe des Salons und der abgebildeten Personen einzuholen. Öffentlich sichtbar bedeutet nicht frei verwendbar.",
+  "abgerufen": "2026-09-20",
+  "freigabe": "Download und lokale Verwendung am 20.09.2026 durch Nick Holzbecher freigegeben (Demo-Zweck).",
+  "nichtVerwendet": [
+    "header.png (u.jimcdn.com/cms/o/sf1a8fa5d0a7504e5/emotion/crop/header.png): leere weisse Fläche, kein Inhalt"
+  ],
+  "dateien": [
+    {
+      "datei": "logo.jpg",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/logo/version/1353258185/image.jpg",
+      "fundort": "https://www.styling-azzurro.ch/(Kopfbereich aller Seiten)",
+      "masse": "250x90",
+      "zeigt": "Logo «Coiffeur Styling Azzurro», blaue Wortmarke auf Weiss",
+      "hinweis": "Sehr klein. Die Demo verwendet die grössere Wortmarke aus dem Preislisten-Bild."
+    },
+    {
+      "datei": "preisliste.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/ie265aa098e4257e7/version/1645388990/image.png",
+      "fundort": "https://www.styling-azzurro.ch/preisliste/",
+      "masse": "668x1000",
+      "zeigt": "Preisliste als Bild (Logo, 3 Kategorien, 31 Positionen, 2 Hinweise)",
+      "hinweis": "Quelle aller Preise; auch Quelle für Logo und Favicon."
+    },
+    {
+      "datei": "schaufenster-neon.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/ia700698920ab6517/version/1742127945/image.png",
+      "fundort": "https://www.styling-azzurro.ch/",
+      "masse": "750x1000",
+      "zeigt": "Schaufenster mit blauer Leuchtschrift «Styling Azzurro»"
+    },
+    {
+      "datei": "team-selfie.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/ic6b3b5708ec96b34/version/1645387552/image.png",
+      "fundort": "https://www.styling-azzurro.ch/team/",
+      "masse": "562x1000",
+      "zeigt": "Zwei Frauen, Selfie; im Original mit Bildunterschrift «Antonella Rullo»",
+      "hinweis": "Einzige beschriftete Aufnahme; zeigt beide Personen."
+    },
+    {
+      "datei": "team-im-salon-a.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/iee3cc9b0186aa2a6/version/1645386888/image.png",
+      "fundort": "https://www.styling-azzurro.ch/team/",
+      "masse": "750x1000",
+      "zeigt": "Zwei Frauen nebeneinander im Salon"
+    },
+    {
+      "datei": "team-im-salon-b.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/ifc182b00d64445fa/version/1645386738/image.png",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "750x1000",
+      "zeigt": "Zwei Frauen nebeneinander im Salon (ähnliche Aufnahme)"
+    },
+    {
+      "datei": "team-nah.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/i506f79ef420857f5/version/1742128334/image.png",
+      "fundort": "https://www.styling-azzurro.ch/team/",
+      "masse": "1000x843",
+      "zeigt": "Zwei Frauen, Nahaufnahme"
+    },
+    {
+      "datei": "team-fenster.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/i065a7aa101ae3df7/version/1645386960/image.png",
+      "fundort": "https://www.styling-azzurro.ch/team/",
+      "masse": "1000x751",
+      "zeigt": "Zwei Frauen mit Schutzmasken vor dem Schaufenster",
+      "hinweis": "Auf «Mein Geschäft» nochmals als i6001115d2131a921 (gleiches Motiv), nicht doppelt geladen."
+    },
+    {
+      "datei": "team-masken-salon.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/ia2cfa675a39df19b/version/1645386083/image.png",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "751x1000",
+      "zeigt": "Zwei Frauen mit Schutzmasken vor dem Produkteregal"
+    },
+    {
+      "datei": "team-ausflug.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/ibf7d0a84083a17b6/version/1645386083/image.png",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "751x1000",
+      "zeigt": "Zwei Frauen im Freien"
+    },
+    {
+      "datei": "team-anlass.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/i04d1db5127f05752/version/1742128379/image.png",
+      "fundort": "https://www.styling-azzurro.ch/team/",
+      "masse": "750x1000",
+      "zeigt": "Zwei Frauen vor roter Wand bei einem Anlass",
+      "hinweis": "Auf «Mein Geschäft» nochmals als i33ea11017cfbd2ec und iee7d80df958f1562 (gleiches Motiv), nicht doppelt geladen."
+    },
+    {
+      "datei": "team-portrait.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/i7a4ced60235bd925/version/1742128026/image.png",
+      "fundort": "https://www.styling-azzurro.ch/team/",
+      "masse": "750x1000",
+      "zeigt": "Porträt einer Frau im weissen Rollkragenpullover",
+      "hinweis": "Keine Namensangabe im Original."
+    },
+    {
+      "datei": "haarwaesche.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/i151bd0433e0e933e/version/1645386083/image.png",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "750x1000",
+      "zeigt": "Haarwäsche am Waschplatz, Kunde und Coiffeuse"
+    },
+    {
+      "datei": "salon-uebersicht.jpg",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/ib95ad62e6df8c09a/version/1368985331/image.jpg",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "1280x960",
+      "zeigt": "Salon mit Frisierplätzen und Wandbild (Mühle am Meer)"
+    },
+    {
+      "datei": "salon-arbeitsplatz.jpg",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/i89f2735bb3bd9c22/version/1368985230/image.jpg",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "1280x960",
+      "zeigt": "Frisierplatz mit beleuchtetem Spiegel",
+      "hinweis": "Auf derselben Seite nochmals als ia5c2e540fec12aa1 (gleiches Motiv), nicht doppelt geladen."
+    },
+    {
+      "datei": "salon-empfang.jpg",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/ie8eb4327edf5ede4/version/1368985282/image.jpg",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "1280x960",
+      "zeigt": "Empfang mit Produkteregal"
+    },
+    {
+      "datei": "salon-waschplatz.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/i7762adb5d743185c/version/1742128062/image.png",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "1000x750",
+      "zeigt": "Waschplatz mit Spiegel"
+    },
+    {
+      "datei": "salon-spiegelplatz.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/i1ee8ff0e1d5eb99b/version/1645386591/image.png",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "750x1000",
+      "zeigt": "Frisierplatz mit Blumen"
+    },
+    {
+      "datei": "salon-innen-neon.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/i9163c97be3c5b481/version/1645386249/image.png",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "750x1000",
+      "zeigt": "Wartebereich mit Leuchtschrift von innen, weihnachtlich"
+    },
+    {
+      "datei": "produkte-regal-a.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/i719ca330543d7839/version/1759212734/image.png",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "469x1000",
+      "zeigt": "Beleuchtetes Produkteregal"
+    },
+    {
+      "datei": "produkte-regal-b.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/ifd9592f772ed3a28/version/1759212722/image.png",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "488x1000",
+      "zeigt": "Produkteregal"
+    },
+    {
+      "datei": "kundin-im-stuhl.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/ibef910b8e85ba8c2/version/1742128128/image.png",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "750x1000",
+      "zeigt": "Kundin im Frisierstuhl"
+    },
+    {
+      "datei": "frisur-locken-a.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/ibb53186195325f16/version/1742128172/image.png",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "460x1000",
+      "zeigt": "Lange Locken von hinten"
+    },
+    {
+      "datei": "frisur-locken-b.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/id3a3f4b3b24fd38d/version/1742128156/image.png",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "460x1000",
+      "zeigt": "Locken von hinten"
+    },
+    {
+      "datei": "hund-im-salon.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/if172698b01cd5cfc/version/1645388027/image.png",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "749x1000",
+      "zeigt": "Kleiner Hund im Salon"
+    },
+    {
+      "datei": "herz-dekoration.png",
+      "quelle": "https://image.jimcdn.com/app/cms/image/transf/none/path/sf1a8fa5d0a7504e5/image/i9303700689677496/version/1675195425/image.png",
+      "fundort": "https://www.styling-azzurro.ch/mein-geschäft/",
+      "masse": "750x1000",
+      "zeigt": "Herzdekoration vor dem Salon"
+    }
+  ]
+}

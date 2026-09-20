@@ -1,0 +1,76 @@
+.rahmen {
+  display: grid;
+  gap: var(--a-3);
+}
+
+.karte {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 0;
+  border-radius: var(--radius-flaeche);
+  background: var(--papier-2);
+}
+
+@media (min-width: 48rem) {
+  .karte {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+.leiste {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--a-3);
+}
+
+.platzhalter {
+  display: grid;
+  gap: var(--a-4);
+  justify-items: start;
+  padding: var(--a-6);
+  border: 1.5px dashed var(--linie-stark);
+  border-radius: var(--radius-flaeche);
+  background: var(--papier-2);
+}
+
+.symbol {
+  color: var(--azzurro);
+}
+
+.adresse {
+  font-weight: 700;
+  font-size: var(--groesse-lead);
+}
+
+.erklaerung {
+  max-width: var(--text-breite);
+  color: var(--tinte-2);
+}
+
+.aktionen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--a-3);
+}
+
+.merken {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--a-3);
+}
+
+.merken input {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0.2rem 0 0;
+  accent-color: var(--azzurro);
+  flex: 0 0 auto;
+}
+
+.merken label {
+  min-height: var(--ziel);
+  display: flex;
+  align-items: center;
+}

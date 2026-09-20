@@ -1,0 +1,90 @@
+.fuss {
+  margin-top: var(--abschnitt);
+  border-top: 1px solid var(--linie);
+  background: var(--papier-2);
+}
+
+.raster {
+  display: grid;
+  gap: var(--a-6);
+  padding-block: var(--a-8) var(--a-6);
+}
+
+.spalte {
+  display: grid;
+  gap: var(--a-3);
+  align-content: start;
+}
+
+.titel {
+  font-size: var(--groesse-text);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.adresse {
+  font-style: normal;
+}
+
+.kontaktliste,
+.linkliste,
+.rechtsliste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.kontaktliste li,
+.linkliste li {
+  display: flex;
+}
+
+.kontaktliste a,
+.linkliste a,
+.rechtsliste a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--ziel);
+  min-width: var(--ziel);
+  color: var(--tinte);
+  text-decoration: none;
+}
+
+.kontaktliste a:hover,
+.linkliste a:hover,
+.rechtsliste a:hover {
+  color: var(--azzurro);
+  text-decoration: underline;
+}
+
+.facebook {
+  gap: var(--a-2);
+}
+
+.termin {
+  margin-top: var(--a-1);
+}
+
+.unten {
+  display: grid;
+  gap: var(--a-4);
+  padding-block: var(--a-5) var(--a-7);
+  border-top: 1px solid var(--linie);
+}
+
+.rechtsliste {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--a-2) var(--a-5);
+}
+
+.demo {
+  max-width: var(--text-breite);
+}
+
+@media (min-width: 48rem) {
+  .raster {
+    grid-template-columns: 1.3fr 1fr 0.8fr;
+    gap: var(--a-7);
+  }
+}

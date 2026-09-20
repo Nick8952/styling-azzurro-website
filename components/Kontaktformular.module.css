@@ -1,0 +1,20 @@
+.formular {
+  display: grid;
+  gap: var(--a-5);
+  max-width: var(--text-breite);
+}
+
+.zweispaltig {
+  display: grid;
+  gap: var(--a-5);
+}
+
+.status {
+  min-height: 1.6em;
+}
+
+@media (min-width: 40rem) {
+  .zweispaltig {
+    grid-template-columns: 1fr 1fr;
+  }
+}

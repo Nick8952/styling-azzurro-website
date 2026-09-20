@@ -1,0 +1,461 @@
+/*
+ * Gestaltungssystem «Leuchtschrift» für Coiffeur Styling Azzurro.
+ *
+ * Abgeleitet aus dem Salon: weisse Räume, ein einziges Blau (die Leuchtschrift
+ * im Schaufenster und die Wortmarke), sonst nichts. Alle Werte sind Token;
+ * Komponenten verwenden keine rohen Farb- oder Abstandswerte.
+ * Dokumentation: docs/designkonzept.md und docs/design-handoff.md
+ */
+@import "@fontsource-variable/figtree/index.css";
+@import "@fontsource-variable/figtree/wght-italic.css";
+
+:root {
+  color-scheme: light;
+
+  /* Farben */
+  --papier: #ffffff;
+  --papier-2: #f3f5fc;
+  --linie: #d9def0;
+  --linie-stark: #b7bfe0;
+  --tinte: #12172e;
+  --tinte-2: #4a5170;
+  --azzurro: #2431d6;
+  --azzurro-dunkel: #1b26ae;
+  --azzurro-hell: #e8ebfc;
+  --neon: #5c6cff;
+  --neon-glanz: rgba(92, 108, 255, 0.55);
+  --fehler: #b3261e;
+  --fokus: var(--azzurro);
+  --schatten: 0 12px 32px -16px rgba(18, 23, 46, 0.25), 0 2px 6px -2px rgba(36, 49, 214, 0.08);
+
+  /* Schrift */
+  --schrift: "Figtree Variable", "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --groesse-klein: 0.9375rem;
+  --groesse-text: 1.0625rem;
+  --groesse-lead: 1.25rem;
+  --groesse-h3: 1.25rem;
+  --groesse-h2: clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem);
+  --groesse-h1: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
+  --zeile-text: 1.6;
+  --zeile-titel: 1.08;
+
+  /* Abstände (4er-Raster) */
+  --a-1: 0.25rem;
+  --a-2: 0.5rem;
+  --a-3: 0.75rem;
+  --a-4: 1rem;
+  --a-5: 1.5rem;
+  --a-6: 2rem;
+  --a-7: 3rem;
+  --a-8: 4rem;
+  --a-9: 6rem;
+  --a-10: 8rem;
+  --abschnitt: clamp(var(--a-8), 6vw, var(--a-9));
+  --rand: clamp(var(--a-4), 4vw, var(--a-7));
+  --inhalt-breite: 72rem;
+  --text-breite: 40rem;
+
+  /* Formen: Knöpfe rund, Flächen 14 px, Eingaben 10 px */
+  --radius-flaeche: 14px;
+  --radius-eingabe: 10px;
+  --radius-knopf: 999px;
+
+  /* Bewegung */
+  --dauer-kurz: 160ms;
+  --dauer: 320ms;
+  --kurve: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Ebenen */
+  --ebene-kopf: 20;
+  --ebene-menue: 30;
+  --ebene-dialog: 40;
+
+  /* Mindestgrösse für Berührungsziele */
+  --ziel: 2.75rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--schrift);
+  font-size: var(--groesse-text);
+  line-height: var(--zeile-text);
+  color: var(--tinte);
+  background: var(--papier);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 700;
+  line-height: var(--zeile-titel);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--groesse-h1);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  font-size: var(--groesse-h2);
+}
+
+h3 {
+  font-size: var(--groesse-h3);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+p + p {
+  margin-top: var(--a-4);
+}
+
+a {
+  color: var(--azzurro);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+  transition: color var(--dauer-kurz) var(--kurve);
+}
+
+a:hover {
+  color: var(--azzurro-dunkel);
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Symbole behalten in Flex-Reihen ihre Grösse (Chrome rechnet SVG-Attribute in Flex-Zeilen sonst auf 0) */
+svg {
+  flex-shrink: 0;
+}
+
+.knopf svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid var(--fokus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--azzurro-hell);
+  color: var(--tinte);
+}
+
+/* ------------------------------------------------------------ Grundraster */
+
+.inhalt {
+  width: 100%;
+  max-width: var(--inhalt-breite);
+  margin-inline: auto;
+  padding-inline: var(--rand);
+}
+
+.abschnitt {
+  padding-block: var(--abschnitt);
+}
+
+.abschnitt-wash {
+  background: var(--papier-2);
+}
+
+.textbreite {
+  max-width: var(--text-breite);
+}
+
+.lead {
+  font-size: var(--groesse-lead);
+  line-height: 1.5;
+  color: var(--tinte-2);
+  text-wrap: pretty;
+}
+
+.klein {
+  font-size: var(--groesse-klein);
+  color: var(--tinte-2);
+}
+
+.betont {
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Signatur: Leuchtlinie unter Seitentiteln, wie die Röhre im Schaufenster. */
+.leuchtlinie {
+  position: relative;
+  padding-bottom: var(--a-4);
+}
+
+.leuchtlinie::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 3.5rem;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--neon);
+  box-shadow: 0 0 12px 1px var(--neon-glanz);
+}
+
+/* Seitenkopf jeder Unterseite */
+.seitenkopf {
+  padding-top: clamp(var(--a-6), 5vw, var(--a-8));
+  padding-bottom: var(--a-6);
+}
+
+.seitenkopf .lead {
+  margin-top: var(--a-5);
+  max-width: var(--text-breite);
+}
+
+/* ------------------------------------------------------------------ Knöpfe */
+
+.knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--a-2);
+  min-height: var(--ziel);
+  padding: 0.7rem 1.35rem;
+  border-radius: var(--radius-knopf);
+  border: 1.5px solid transparent;
+  font-weight: 600;
+  font-size: var(--groesse-text);
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--dauer-kurz) var(--kurve),
+    color var(--dauer-kurz) var(--kurve),
+    border-color var(--dauer-kurz) var(--kurve),
+    transform var(--dauer-kurz) var(--kurve);
+}
+
+.knopf:active {
+  transform: translateY(1px);
+}
+
+.knopf-primaer {
+  background: var(--azzurro);
+  color: var(--papier);
+}
+
+.knopf-primaer:hover {
+  background: var(--azzurro-dunkel);
+  color: var(--papier);
+}
+
+.knopf-sekundaer {
+  background: var(--papier);
+  color: var(--azzurro);
+  border-color: var(--azzurro);
+}
+
+.knopf-sekundaer:hover {
+  background: var(--azzurro-hell);
+  color: var(--azzurro-dunkel);
+}
+
+.knopf-leise {
+  background: transparent;
+  color: var(--tinte);
+  border-color: var(--linie-stark);
+}
+
+.knopf-leise:hover {
+  border-color: var(--tinte);
+  color: var(--tinte);
+}
+
+.knopfreihe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--a-3);
+}
+
+/* Textlink mit Pfeil, für «mehr»-Verweise */
+.pfeillink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--a-2);
+  min-height: var(--ziel);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pfeillink::after {
+  content: "→";
+  transition: transform var(--dauer-kurz) var(--kurve);
+}
+
+.pfeillink:hover::after {
+  transform: translateX(3px);
+}
+
+/* --------------------------------------------------------------- Formulare */
+
+.feld {
+  display: grid;
+  gap: var(--a-2);
+}
+
+.feld label {
+  font-weight: 600;
+}
+
+.feld input,
+.feld textarea {
+  width: 100%;
+  min-height: var(--ziel);
+  padding: 0.7rem 0.9rem;
+  border: 1.5px solid var(--linie-stark);
+  border-radius: var(--radius-eingabe);
+  background: var(--papier);
+  transition: border-color var(--dauer-kurz) var(--kurve);
+}
+
+.feld input:focus,
+.feld textarea:focus {
+  border-color: var(--azzurro);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--azzurro-hell);
+}
+
+.feld input[aria-invalid="true"],
+.feld textarea[aria-invalid="true"] {
+  border-color: var(--fehler);
+}
+
+.feld .hilfe {
+  font-size: var(--groesse-klein);
+  color: var(--tinte-2);
+}
+
+.feld .fehler {
+  font-size: var(--groesse-klein);
+  color: var(--fehler);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------- Unsichtbar für Sehende */
+
+.nur-vorlesen {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sprunglink {
+  position: absolute;
+  left: var(--a-4);
+  top: var(--a-4);
+  z-index: 100;
+  padding: var(--a-3) var(--a-4);
+  background: var(--tinte);
+  color: var(--papier);
+  border-radius: var(--radius-eingabe);
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--dauer-kurz) var(--kurve);
+}
+
+.sprunglink:focus-visible {
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------------------- Rich Text */
+
+.fliesstext > * + * {
+  margin-top: var(--a-4);
+}
+
+.fliesstext h2 {
+  margin-top: var(--a-7);
+  font-size: 1.5rem;
+}
+
+.fliesstext h3 {
+  margin-top: var(--a-6);
+}
+
+.fliesstext ul,
+.fliesstext ol {
+  padding-left: 1.25rem;
+}
+
+.fliesstext li + li {
+  margin-top: var(--a-2);
+}
+
+.fliesstext blockquote {
+  margin: var(--a-5) 0;
+  padding-left: var(--a-5);
+  border-left: 3px solid var(--neon);
+  color: var(--tinte-2);
+  font-style: italic;
+}
+
+/* ------------------------------------------------------------ Bewegung */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

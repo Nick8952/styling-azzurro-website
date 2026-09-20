@@ -1,0 +1,50 @@
+.kopf {
+  position: sticky;
+  top: 0;
+  z-index: var(--ebene-kopf);
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid var(--linie);
+  backdrop-filter: saturate(160%) blur(10px);
+  -webkit-backdrop-filter: saturate(160%) blur(10px);
+}
+
+.zeile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--a-4);
+  min-height: 4.25rem;
+}
+
+.marke {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  min-height: var(--ziel);
+  border-radius: 6px;
+}
+
+.marke img {
+  width: 150px;
+  height: auto;
+}
+
+@media (max-width: 24.99rem) {
+  .marke img {
+    width: 136px;
+  }
+}
+
+@media (min-width: 48rem) {
+  .marke img {
+    width: 200px;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .kopf {
+    background: var(--papier);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

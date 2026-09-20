@@ -1,0 +1,165 @@
+/* Spaltenlayout: Bilder behalten ihr Seitenverhältnis, keine Lücken, kein Beschnitt. */
+.wand {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2;
+  column-gap: var(--a-3);
+}
+
+.wand li {
+  display: block;
+  min-width: 0;
+  break-inside: avoid;
+  margin-bottom: var(--a-3);
+}
+
+.quer {
+  break-inside: avoid;
+}
+
+.knopf,
+.figur {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: var(--radius-flaeche);
+  overflow: hidden;
+  text-align: left;
+}
+
+.knopf {
+  cursor: zoom-in;
+  transition: transform var(--dauer) var(--kurve), box-shadow var(--dauer) var(--kurve);
+}
+
+.knopf:hover {
+  box-shadow: var(--schatten);
+}
+
+.knopf:focus-visible {
+  outline-offset: 3px;
+}
+
+.bild {
+  border-radius: var(--radius-flaeche);
+}
+
+.legende {
+  padding: var(--a-2) var(--a-1) 0;
+  font-size: var(--groesse-klein);
+  color: var(--tinte-2);
+}
+
+@media (min-width: 40rem) {
+  .wand {
+    columns: 3;
+    column-gap: var(--a-4);
+  }
+
+  .wand li {
+    margin-bottom: var(--a-4);
+  }
+}
+
+@media (min-width: 64rem) {
+  .wand {
+    columns: 4;
+  }
+}
+
+/* Vergrösserung */
+.dialog {
+  width: min(100vw, 100%);
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(18, 23, 46, 0.92);
+  color: var(--papier);
+}
+
+.dialog::backdrop {
+  background: transparent;
+}
+
+.dialogInhalt {
+  position: relative;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: var(--a-4);
+}
+
+.gross {
+  margin: 0;
+  max-width: 100%;
+  display: grid;
+  gap: var(--a-3);
+  justify-items: center;
+}
+
+.grossBild {
+  width: auto;
+  max-width: min(100vw - 2rem, 64rem);
+  max-height: calc(100dvh - 8rem);
+  border-radius: var(--radius-flaeche);
+}
+
+.grossBild img {
+  object-fit: contain;
+  max-height: calc(100dvh - 8rem);
+  width: auto;
+}
+
+.grossLegende {
+  font-size: var(--groesse-klein);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.zaehler {
+  white-space: nowrap;
+}
+
+.steuerung {
+  position: absolute;
+  inset-inline: var(--a-3);
+  top: 50%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.steuerKnopf {
+  pointer-events: auto;
+  display: inline-grid;
+  place-items: center;
+  width: var(--ziel);
+  height: var(--ziel);
+  border: 0;
+  border-radius: var(--radius-knopf);
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--papier);
+  transition: background-color var(--dauer-kurz) var(--kurve);
+}
+
+.steuerKnopf:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.steuerKnopf:focus-visible {
+  outline-color: var(--papier);
+}
+
+.schliessen {
+  position: absolute;
+  top: var(--a-3);
+  right: var(--a-3);
+}

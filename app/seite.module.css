@@ -1,0 +1,73 @@
+/* Gemeinsame Bausteine der Unterseiten */
+
+.zweispaltig {
+  display: grid;
+  gap: var(--a-6);
+  align-items: start;
+}
+
+.zweispaltig > * {
+  min-width: 0;
+}
+
+@media (min-width: 64rem) {
+  .zweispaltig {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--a-8);
+  }
+}
+
+.stapel {
+  display: grid;
+  gap: var(--a-5);
+}
+
+.abschnittAbstand {
+  margin-top: var(--abschnitt);
+}
+
+.kleinerAbstand {
+  margin-top: var(--a-6);
+}
+
+.hinweisFlaeche {
+  padding: var(--a-5);
+  border-radius: var(--radius-flaeche);
+  background: var(--papier-2);
+  border: 1px solid var(--linie);
+}
+
+.hinweisFlaeche h2 {
+  font-size: 1.375rem;
+  margin-bottom: var(--a-3);
+}
+
+.rechtstext {
+  max-width: var(--text-breite);
+}
+
+.rechtstext h2 {
+  font-size: 1.5rem;
+}
+
+.stand {
+  margin-top: var(--a-6);
+}
+
+.schmal {
+  max-width: 28rem;
+}
+
+.nummer {
+  font-size: var(--groesse-h2);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  color: var(--tinte);
+  display: inline-block;
+  min-height: var(--ziel);
+}
+
+.nummer:hover {
+  color: var(--azzurro);
+}

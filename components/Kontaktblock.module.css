@@ -1,0 +1,47 @@
+.liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--a-5);
+}
+
+.zeile {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--a-4);
+  align-items: start;
+}
+
+.symbol {
+  color: var(--azzurro);
+  margin-top: 0.35rem;
+}
+
+.beschriftung {
+  display: block;
+  font-size: var(--groesse-klein);
+  color: var(--tinte-2);
+}
+
+.wert {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--ziel);
+  font-size: var(--groesse-lead);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.wert:hover {
+  text-decoration: underline;
+}
+
+.adresse {
+  font-style: normal;
+  line-height: 1.5;
+}
+
+.route {
+  margin-top: var(--a-1);
+}

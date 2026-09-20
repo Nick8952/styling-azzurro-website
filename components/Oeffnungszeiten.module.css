@@ -1,0 +1,74 @@
+.schild {
+  background: var(--papier);
+  border: 1px solid var(--linie);
+  border-top: 4px solid var(--neon);
+  border-radius: var(--radius-flaeche);
+  padding: var(--a-5);
+  box-shadow: var(--schatten);
+}
+
+.titel {
+  margin-bottom: var(--a-4);
+}
+
+.liste,
+.sonder,
+.kompakt {
+  margin: 0;
+}
+
+.zeile,
+.kompaktZeile {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--a-4);
+  padding-block: var(--a-2);
+}
+
+.zeile + .zeile {
+  border-top: 1px dotted var(--linie-stark);
+}
+
+.zeile dt,
+.kompaktZeile dt {
+  font-weight: 600;
+}
+
+.zeile dd,
+.kompaktZeile dd {
+  margin: 0;
+  text-align: right;
+  display: grid;
+  justify-items: end;
+}
+
+.fenster {
+  white-space: nowrap;
+}
+
+.geschlossen {
+  color: var(--tinte-2);
+}
+
+.sonder {
+  margin-top: var(--a-4);
+  padding-top: var(--a-3);
+  border-top: 1px solid var(--linie);
+}
+
+.termin {
+  margin-top: var(--a-4);
+  font-size: var(--groesse-klein);
+  color: var(--tinte-2);
+}
+
+.kompaktZeile {
+  flex-direction: column;
+  gap: 0;
+  padding-block: var(--a-1);
+}
+
+.kompaktZeile dd {
+  text-align: left;
+  justify-items: start;
+}

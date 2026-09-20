@@ -1,0 +1,94 @@
+.tafel {
+  display: grid;
+  gap: var(--a-6);
+}
+
+.hinweise {
+  padding: var(--a-3) var(--a-4);
+  border-left: 3px solid var(--neon);
+  background: var(--azzurro-hell);
+  border-radius: 0 var(--radius-eingabe) var(--radius-eingabe) 0;
+  font-weight: 500;
+}
+
+.kategorien {
+  display: grid;
+  gap: var(--a-7);
+}
+
+.kategorie {
+  display: grid;
+  gap: var(--a-4);
+}
+
+.kategorieTitel {
+  padding-bottom: var(--a-3);
+  border-bottom: 2px solid var(--tinte);
+}
+
+.gruppen,
+.zeilen {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gruppen {
+  display: grid;
+  gap: var(--a-4);
+}
+
+.leistung {
+  font-size: var(--groesse-text);
+  font-weight: 700;
+  margin-bottom: var(--a-1);
+}
+
+.zeile {
+  display: flex;
+  align-items: baseline;
+  gap: var(--a-2);
+  min-height: 2rem;
+  line-height: 1.4;
+}
+
+.zeilen .zeile {
+  padding-left: var(--a-4);
+}
+
+.name {
+  flex: 0 1 auto;
+}
+
+.punkte {
+  flex: 1 1 1rem;
+  min-width: 1rem;
+  border-bottom: 2px dotted var(--linie-stark);
+  transform: translateY(-0.3em);
+}
+
+.preis {
+  flex: 0 0 auto;
+  font-weight: 600;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.positionHinweis {
+  margin-top: var(--a-2);
+  padding-left: var(--a-4);
+  font-size: var(--groesse-klein);
+  color: var(--tinte-2);
+}
+
+@media (min-width: 48rem) {
+  .kategorien {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--a-8);
+  }
+
+  /* Die grosse Damen-Kategorie belegt die volle linke Spalte, Herren und Kinder stapeln rechts. */
+  .kategorie:first-child {
+    grid-row: span 2;
+  }
+}
